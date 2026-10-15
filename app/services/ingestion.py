@@ -5,7 +5,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import PyPDFLoader,TextLoader
 from docx import Document as DocxDocument
 
-supported = {".pdf", ".txt", ".md", ".docx"}
+SUPPORTED = {".pdf", ".txt", ".md", ".docx"}
 
 
 def load_file(path: Path) -> list[Document]:
