@@ -22,6 +22,7 @@ def llm():
             model=settings.groq_model,
             temperature=0,
             api_key=settings.groq_api_key,
+            base_url="https://api.groq.com/openai/v1",
         )
     return _llm
 
