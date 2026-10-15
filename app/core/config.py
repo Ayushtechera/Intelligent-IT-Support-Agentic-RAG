@@ -10,8 +10,8 @@ class Settings(BaseSettings):
     groq_api_key: str = ""
     tavily_api_key: str = ""
     pinecone_api_key: str = ""
-    pinecone_index_name: str = "FDE-IT-Support-Rag"
-    pinecone_namespace: str = "company-IT-KB"
+    pinecone_index_name: str = "intelligent-it-support-rag"
+    pinecone_namespace: str = "company-it-kb"
     embedding_model: str = "sentence-transformers/all-MiniLM-L6-v2"
     groq_model: str = "openai/gpt-oss-20b"
     top_k: int = 4
@@ -22,8 +22,6 @@ class Settings(BaseSettings):
     sample_kb_dir: str = str(BASE_DIR / "data" / "sample_kb")
 
     model_config = SettingsConfigDict(env_file=str(BASE_DIR / ".env"), extra="ignore")
-
-
 
 
 @lru_cache

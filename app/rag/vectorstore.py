@@ -84,6 +84,8 @@ def ensure_index():
                 time.sleep(1)
 
     if settings.pinecone_index_name not in [x["name"] for x in pc.list_indexes()]:
+        print("Index name:", repr(settings.pinecone_index_name))
+        print("Dimension:", desired_dimension)
         pc.create_index(
             name=settings.pinecone_index_name,
             dimension=desired_dimension,
