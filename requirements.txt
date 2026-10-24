@@ -19,7 +19,7 @@ pypdf==6.16.2
 python-docx==1.2.0
 python-dotenv==1.2.2
 bs4
-sentence-transformers
+# sentence-transformers
 langchain_groq
-langchain-huggingface
-sentence-transformers
+# langchain-huggingface
+# sentence-transformers

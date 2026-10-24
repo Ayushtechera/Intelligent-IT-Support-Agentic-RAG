@@ -10,9 +10,9 @@ class Settings(BaseSettings):
     groq_api_key: str = ""
     tavily_api_key: str = ""
     pinecone_api_key: str = ""
-    pinecone_index_name: str = "intelligent-it-support-rag"
+    pinecone_index_name: str = "smart-it-support-rag"
     pinecone_namespace: str = "company-it-kb"
-    embedding_model: str = "sentence-transformers/all-MiniLM-L6-v2"
+    embedding_model: str = "multilingual-e5-large"
     groq_model: str = "openai/gpt-oss-20b"
     top_k: int = 4
     max_retries: int = 1

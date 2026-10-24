@@ -1,10 +1,11 @@
 import time
 from pinecone import Pinecone, ServerlessSpec
 import os
-from langchain_huggingface import HuggingFaceEmbeddings
+# from langchain_huggingface import HuggingFaceEmbeddings
 from dotenv import load_dotenv
 from langchain_pinecone import PineconeVectorStore
 from app.core.config import get_settings
+from langchain_pinecone import PineconeEmbeddings
 
 load_dotenv()
 
@@ -16,15 +17,16 @@ _embeddings = None
 _vectorstore = None
 
 
-embedding = HuggingFaceEmbeddings(
-    model_name = os.getenv("EMBEDDING_MODEL")
-)
+# embedding = HuggingFaceEmbeddings(
+#     model_name = os.getenv("EMBEDDING_MODEL")
+# )
 
 EMBEDDING_DIMENSIONS = {
     "text-embedding-3-small": 1536,
     "text-embedding-3-large": 3072,
     "text-embedding-ada-002": 1536,
     "all-minilm-l6-v2": 384,
+    "multilingual-e5-large": 1024,
 }
 
 
@@ -44,7 +46,9 @@ def get_embedding_dimension(model_name: str | None = None) -> int:
         return 1536
     if "all-minilm" in normalized:
         return 384
-
+    if "multilingual-e5-large" in normalized:
+        return 1024 
+    
     raise ValueError(
         f"Unsupported embedding model '{model_name or settings.embedding_model}' for Pinecone. "
         "Add the matching dimension to EMBEDDING_DIMENSIONS."
@@ -55,9 +59,9 @@ def get_embeddings():
     global _embeddings
 
     if _embeddings is None:
-        _embeddings = HuggingFaceEmbeddings(
-            model_name = settings.embedding_model,
-            encode_kwargs={"normalize_embeddings": True},
+        _embeddings = PineconeEmbeddings(
+            model="settings.embedding_model", 
+            pinecone_api_key=settings.pinecone_api_key,
         )
 
     return _embeddings
@@ -119,4 +123,4 @@ def get_retriever():
 
 def add_documents(chunks):
     store = get_vectorstore()
-    return store.add_documents(chunks)
+    return store.add_documents(chunks) 
