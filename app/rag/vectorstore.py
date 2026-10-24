@@ -60,7 +60,7 @@ def get_embeddings():
 
     if _embeddings is None:
         _embeddings = PineconeEmbeddings(
-            model="settings.embedding_model", 
+            model=settings.embedding_model, 
             pinecone_api_key=settings.pinecone_api_key,
         )
 
